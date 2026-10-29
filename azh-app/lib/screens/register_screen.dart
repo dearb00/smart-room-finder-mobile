@@ -42,261 +42,192 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Create account')),
-body: Container(
-  width: double.infinity,
-  height: double.infinity,
-
-  decoration: const BoxDecoration(
-    gradient: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [
-        Color(0xff071224),
-        Color(0xff15113A),
-        Color(0xff0F1D35),
-      ],
-    ),
-  ),
-
-  child: Center(
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(28),
-
-        child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 20,
-            sigmaY: 20,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xff071224),
+              Color(0xff15113A),
+              Color(0xff0F1D35),
+            ],
           ),
-
-          child: Container(
-            width: 370,
-            padding: const EdgeInsets.all(28),
-
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: .08),
-
+        ),
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: ClipRRect(
               borderRadius: BorderRadius.circular(28),
-
-              border: Border.all(
-                color: Colors.white24,
-              ),
-            ),
-
-            child: Form(
-              key: _formKey,
-
-              child: Column(
-                children: [
-
-              Image.asset(
-  "assets/images/azhly_logo.png",
-  width: 90,
-  height: 90,
-),
-
-                  const SizedBox(height: 8),
-
-                   const Text(
-                             " Smart Room Allocation System",
-                               style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18,
-                                         ),
-                                       ),
-                  
-                    
-
-                  const SizedBox(height: 16),
-
-                  const Text(
-                    "Create Account",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                  sigmaX: 20,
+                  sigmaY: 20,
+                ),
+                child: Container(
+                  width: 370,
+                  padding: const EdgeInsets.all(28),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: .08),
+                    borderRadius: BorderRadius.circular(28),
+                    border: Border.all(
+                      color: Colors.white24,
                     ),
                   ),
-
-                  const SizedBox(height: 8),
-
-                  const Text(
-                    "Join the AZHly Smart Room Allocation System",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white70,
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          "assets/images/azhly_logo.png",
+                          width: 90,
+                          height: 90,
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          " Smart Room Allocation System",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        const Text(
+                          "Create Account",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          "Join the AZHly Smart Room Allocation System",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white70,
+                          ),
+                        ),
+                        const SizedBox(height: 30),
+                        TextFormField(
+                          controller: _nameCtrl,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            labelText: "Full Name",
+                            labelStyle: const TextStyle(
+                              color: Colors.white70,
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.person,
+                              color: Colors.white70,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white.withValues(alpha: .06),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          validator: (v) =>
+                              v == null || v.isEmpty ? "Required" : null,
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: _usernameCtrl,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            labelText: "University Email",
+                            labelStyle: const TextStyle(
+                              color: Colors.white70,
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.email,
+                              color: Colors.white70,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white.withValues(alpha: .06),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          validator: (v) =>
+                              v == null || v.isEmpty ? "Required" : null,
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: _passwordCtrl,
+                          obscureText: true,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            labelText: "Password",
+                            labelStyle: const TextStyle(
+                              color: Colors.white70,
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.lock,
+                              color: Colors.white70,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white.withValues(alpha: .06),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          validator: (v) => v == null || v.length < 4
+                              ? "Minimum 4 characters"
+                              : null,
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: _confirmCtrl,
+                          obscureText: true,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                            labelText: "Confirm Password",
+                            labelStyle: const TextStyle(
+                              color: Colors.white70,
+                            ),
+                            prefixIcon: const Icon(
+                              Icons.lock_outline,
+                              color: Colors.white70,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white.withValues(alpha: .06),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
+                          validator: (v) => v != _passwordCtrl.text
+                              ? "Passwords do not match"
+                              : null,
+                        ),
+                        const SizedBox(height: 25),
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: _submit,
+                            child: const Text(
+                              "REGISTER",
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text(
+                            "Already have an account? Login",
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-
-                  const SizedBox(height: 30),
-
-                  TextFormField(
-                    controller: _nameCtrl,
-                    style: const TextStyle(color: Colors.white),
-
-                    decoration: InputDecoration(
-                      labelText: "Full Name",
-
-                      labelStyle: const TextStyle(
-                        color: Colors.white70,
-                      ),
-
-                      prefixIcon: const Icon(
-                        Icons.person,
-                        color: Colors.white70,
-                      ),
-
-                      filled: true,
-                      fillColor: Colors.white.withValues(alpha: .06),
-
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15),
-                      ),
-                    ),
-
-                    validator: (v) =>
-                        v == null || v.isEmpty
-                            ? "Required"
-                            : null,
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  TextFormField(
-                    controller: _usernameCtrl,
-                    style: const TextStyle(color: Colors.white),
-
-                    decoration: InputDecoration(
-                      labelText: "University Email",
-
-                      labelStyle: const TextStyle(
-                        color: Colors.white70,
-                      ),
-
-                      prefixIcon: const Icon(
-                        Icons.email,
-                        color: Colors.white70,
-                      ),
-
-                      filled: true,
-                      fillColor: Colors.white.withValues(alpha: .06),
-
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15),
-                      ),
-                    ),
-
-                    validator: (v) =>
-                        v == null || v.isEmpty
-                            ? "Required"
-                            : null,
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  TextFormField(
-                    controller: _passwordCtrl,
-                    obscureText: true,
-                    style: const TextStyle(color: Colors.white),
-
-                    decoration: InputDecoration(
-                      labelText: "Password",
-
-                      labelStyle: const TextStyle(
-                        color: Colors.white70,
-                      ),
-
-                      prefixIcon: const Icon(
-                        Icons.lock,
-                        color: Colors.white70,
-                      ),
-
-                      filled: true,
-                      fillColor: Colors.white.withValues(alpha: .06),
-
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15),
-                      ),
-                    ),
-
-                    validator: (v) =>
-                        v == null || v.length < 4
-                            ? "Minimum 4 characters"
-                            : null,
-                  ),
-
-                  const SizedBox(height: 16),
-
-                  TextFormField(
-                    controller: _confirmCtrl,
-                    obscureText: true,
-                    style: const TextStyle(color: Colors.white),
-
-                    decoration: InputDecoration(
-                      labelText: "Confirm Password",
-
-                      labelStyle: const TextStyle(
-                        color: Colors.white70,
-                      ),
-
-                      prefixIcon: const Icon(
-                        Icons.lock_outline,
-                        color: Colors.white70,
-                      ),
-
-                      filled: true,
-                      fillColor: Colors.white.withValues(alpha: .06),
-
-                      border: OutlineInputBorder(
-                        borderRadius:
-                            BorderRadius.circular(15),
-                      ),
-                    ),
-
-                    validator: (v) =>
-                        v != _passwordCtrl.text
-                            ? "Passwords do not match"
-                            : null,
-                  ),
-
-                  const SizedBox(height: 25),
-
-                  SizedBox(
-                    width: double.infinity,
-
-                    child: ElevatedButton(
-                      onPressed: _submit,
-
-                      child: const Text(
-                        "REGISTER",
-                      ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 15),
-
-                  TextButton(
-                    onPressed: () =>
-                        Navigator.pop(context),
-
-                    child: const Text(
-                      "Already have an account? Login",
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
         ),
       ),
-    ),
-  ),
-),
-);
+    );
   }
 }

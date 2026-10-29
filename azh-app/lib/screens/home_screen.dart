@@ -59,7 +59,8 @@ class HomeScreen extends StatelessWidget {
         children: [
           Text(
             'Hi, $displayName',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: textColor),
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.w700, color: textColor),
           ),
           const SizedBox(height: 2),
           Text(
@@ -91,7 +92,8 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 22),
           Text(
             "Today's classes",
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: textColor),
+            style: TextStyle(
+                fontSize: 14, fontWeight: FontWeight.w700, color: textColor),
           ),
           const SizedBox(height: 10),
           for (final c in _todayClasses)
@@ -107,7 +109,8 @@ class HomeScreen extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             'Makeup classes',
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: textColor),
+            style: TextStyle(
+                fontSize: 14, fontWeight: FontWeight.w700, color: textColor),
           ),
           const SizedBox(height: 10),
           for (final c in _makeupClasses)
@@ -170,7 +173,8 @@ class _StatCard extends StatelessWidget {
           const SizedBox(height: 10),
           Text(
             value,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, color: textColor),
+            style: TextStyle(
+                fontSize: 20, fontWeight: FontWeight.w700, color: textColor),
           ),
           const SizedBox(height: 2),
           Text(label, style: TextStyle(fontSize: 11, color: dimColor)),

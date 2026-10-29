@@ -22,103 +22,85 @@ class RoleSelectScreen extends StatelessWidget {
     final dimColor = isDark ? AppColors.darkTextDim : AppColors.lightTextDim;
 
     return Scaffold(
-     body: Container(
-  width: double.infinity,
-  height: double.infinity,
-
-  decoration: const BoxDecoration(
-    gradient: LinearGradient(
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-      colors: [
-        Color(0xff071224),
-        Color(0xff15113A),
-        Color(0xff0F1D35),
-      ],
-    ),
-  ),
-
-  child: Center(
-    child: SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(28),
-
-        child: BackdropFilter(
-          filter: ImageFilter.blur(
-            sigmaX: 20,
-            sigmaY: 20,
-          ),
-
-          child: Container(
-            width: 370,
-            padding: const EdgeInsets.all(28),
-
-            decoration: BoxDecoration(
-              // ignore: deprecated_member_use
-              color: Colors.white.withOpacity(.08),
-
-              borderRadius: BorderRadius.circular(28),
-
-              border: Border.all(
-                color: Colors.white24,
+        body: Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xff071224),
+            Color(0xff15113A),
+            Color(0xff0F1D35),
+          ],
+        ),
+      ),
+      child: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(28),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                sigmaX: 20,
+                sigmaY: 20,
               ),
-            ),
+              child: Container(
+                width: 370,
+                padding: const EdgeInsets.all(28),
+                decoration: BoxDecoration(
+                  // ignore: deprecated_member_use
+                  color: Colors.white.withOpacity(.08),
 
-            child: Column(
-              children: [
+                  borderRadius: BorderRadius.circular(28),
 
-                Image.asset(
-                  "assets/images/azhly_logo.png",
-                  width: 90,
-                ),
-
-                const SizedBox(height: 18),
-
-                const Text(
-                  "Select Your Role",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                  border: Border.all(
+                    color: Colors.white24,
                   ),
                 ),
-
-                const SizedBox(height: 8),
-
-                const Text(
-                  "Choose how you want to continue",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
+                child: Column(
+                  children: [
+                    Image.asset(
+                      "assets/images/azhly_logo.png",
+                      width: 90,
+                    ),
+                    const SizedBox(height: 18),
+                    const Text(
+                      "Select Your Role",
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      "Choose how you want to continue",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 14,
+                      ),
+                    ),
+                    const SizedBox(height: 28),
+                    for (final role in AzhlyRole.values) ...[
+                      _RoleCard(
+                        role: role,
+                        userData: userData,
+                      ),
+                      const SizedBox(height: 16),
+                    ],
+                  ],
                 ),
-
-                const SizedBox(height: 28),
-
-                for (final role in AzhlyRole.values) ...[
-                  _RoleCard(
-                    role: role,
-                    userData: userData,
-                  ),
-
-                  const SizedBox(height: 16),
-                ],
-              ],
+              ),
             ),
           ),
         ),
       ),
-    ),
-  ),
-)
-
-    );     
+    ));
   }
-
-  }
+}
 
 class _RoleCard extends StatelessWidget {
   final AzhlyRole role;

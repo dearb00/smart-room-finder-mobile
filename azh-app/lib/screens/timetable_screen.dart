@@ -17,20 +17,62 @@ class _TimetableScreenState extends State<TimetableScreen> {
   // Replace with real data from your backend / provider.
   static const _byDay = {
     'Mon': [
-      {'department': 'CS', 'roomNo': '104', 'block': 'A', 'floor': '1', 'subject': 'Calculus II', 'timeSlot': '9:00 - 10:30 AM'},
+      {
+        'department': 'CS',
+        'roomNo': '104',
+        'block': 'A',
+        'floor': '1',
+        'subject': 'Calculus II',
+        'timeSlot': '9:00 - 10:30 AM'
+      },
     ],
     'Tue': [
-      {'department': 'CS', 'roomNo': '210', 'block': 'A', 'floor': '2', 'subject': 'Software Engineering', 'timeSlot': '10:00 - 11:30 AM'},
+      {
+        'department': 'CS',
+        'roomNo': '210',
+        'block': 'A',
+        'floor': '2',
+        'subject': 'Software Engineering',
+        'timeSlot': '10:00 - 11:30 AM'
+      },
     ],
     'Wed': [
-      {'department': 'CS', 'roomNo': '112', 'block': 'B', 'floor': '1', 'subject': 'Data Structures', 'timeSlot': '10:00 - 11:30 AM'},
-      {'department': 'CS', 'roomNo': '213', 'block': 'B', 'floor': '2', 'subject': 'Machine Learning', 'timeSlot': '1:30 - 3:00 PM'},
+      {
+        'department': 'CS',
+        'roomNo': '112',
+        'block': 'B',
+        'floor': '1',
+        'subject': 'Data Structures',
+        'timeSlot': '10:00 - 11:30 AM'
+      },
+      {
+        'department': 'CS',
+        'roomNo': '213',
+        'block': 'B',
+        'floor': '2',
+        'subject': 'Machine Learning',
+        'timeSlot': '1:30 - 3:00 PM'
+      },
     ],
     'Thu': [
-      {'department': 'CS', 'roomNo': '305', 'block': 'C', 'floor': '3', 'subject': 'Machine Learning', 'timeSlot': '1:30 - 3:00 PM'},
+      {
+        'department': 'CS',
+        'roomNo': '305',
+        'block': 'C',
+        'floor': '3',
+        'subject': 'Machine Learning',
+        'timeSlot': '1:30 - 3:00 PM'
+      },
     ],
     'Fri': [
-      {'department': 'CS', 'roomNo': '101', 'block': 'B', 'floor': '1', 'subject': 'Discrete Structures', 'timeSlot': '1:30 - 3:00 PM'},
+      {
+        'department': 'CS',
+        'roomNo': '101',
+        'block': 'B',
+        'floor': '1',
+        'subject': 'Discrete Structures',
+        'timeSlot': '1:30 - 3:00 PM'
+      },
     ],
     'Sat': <Map<String, String>>[],
   };
@@ -64,7 +106,8 @@ class _TimetableScreenState extends State<TimetableScreen> {
         Expanded(
           child: classes.isEmpty
               ? Center(
-                  child: Text('No classes scheduled', style: TextStyle(color: dimColor, fontSize: 12)),
+                  child: Text('No classes scheduled',
+                      style: TextStyle(color: dimColor, fontSize: 12)),
                 )
               : ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 16),

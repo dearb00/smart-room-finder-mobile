@@ -45,8 +45,12 @@ class AzhlyBottomNav extends StatelessWidget {
         const AzhlyNavItem(label: 'Home', icon: Icons.home_outlined),
         const AzhlyNavItem(label: 'Room Finder', icon: Icons.search),
         const AzhlyNavItem(label: 'Timetable', icon: Icons.access_time),
-        const AzhlyNavItem(label: 'My Schedule', icon: Icons.event_note_outlined),
-        AzhlyNavItem(label: 'Profile', avatarUrl: avatarUrl, avatarInitials: avatarInitials),
+        const AzhlyNavItem(
+            label: 'My Schedule', icon: Icons.event_note_outlined),
+        AzhlyNavItem(
+            label: 'Profile',
+            avatarUrl: avatarUrl,
+            avatarInitials: avatarInitials),
       ],
     );
   }
@@ -67,7 +71,10 @@ class AzhlyBottomNav extends StatelessWidget {
         const AzhlyNavItem(label: 'Room Finder', icon: Icons.search),
         const AzhlyNavItem(label: 'Timetable', icon: Icons.access_time),
         const AzhlyNavItem(label: 'My Classes', icon: Icons.grid_view_outlined),
-        AzhlyNavItem(label: 'Profile', avatarUrl: avatarUrl, avatarInitials: avatarInitials),
+        AzhlyNavItem(
+            label: 'Profile',
+            avatarUrl: avatarUrl,
+            avatarInitials: avatarInitials),
       ],
     );
   }
@@ -85,10 +92,14 @@ class AzhlyBottomNav extends StatelessWidget {
       onTap: onTap,
       items: [
         const AzhlyNavItem(label: 'Home', icon: Icons.home_outlined),
-        const AzhlyNavItem(label: 'Suggest Room', icon: Icons.lightbulb_outline),
+        const AzhlyNavItem(
+            label: 'Suggest Room', icon: Icons.lightbulb_outline),
         const AzhlyNavItem(label: 'Timetable', icon: Icons.access_time),
         const AzhlyNavItem(label: 'My Classes', icon: Icons.grid_view_outlined),
-        AzhlyNavItem(label: 'Profile', avatarUrl: avatarUrl, avatarInitials: avatarInitials),
+        AzhlyNavItem(
+            label: 'Profile',
+            avatarUrl: avatarUrl,
+            avatarInitials: avatarInitials),
       ],
     );
   }
@@ -131,15 +142,19 @@ class AzhlyBottomNav extends StatelessWidget {
         shape: BoxShape.circle,
         border: Border.all(color: borderColor, width: 1.5),
         image: item.avatarUrl != null
-            ? DecorationImage(image: NetworkImage(item.avatarUrl!), fit: BoxFit.cover)
+            ? DecorationImage(
+                image: NetworkImage(item.avatarUrl!), fit: BoxFit.cover)
             : null,
-        color: item.avatarUrl == null ? AppColors.purple.withValues(alpha: 0.15) : null,
+        color: item.avatarUrl == null
+            ? AppColors.purple.withValues(alpha: 0.15)
+            : null,
       ),
       alignment: Alignment.center,
       child: item.avatarUrl == null
           ? Text(
               item.avatarInitials ?? '',
-              style: TextStyle(fontSize: 8, fontWeight: FontWeight.w700, color: borderColor),
+              style: TextStyle(
+                  fontSize: 8, fontWeight: FontWeight.w700, color: borderColor),
             )
           : null,
     );

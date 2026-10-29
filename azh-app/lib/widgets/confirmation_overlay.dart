@@ -105,7 +105,8 @@ class _ConfirmationDialogState extends State<_ConfirmationDialog> {
             const SizedBox(height: 12),
             Text(
               widget.title,
-              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: textColor),
+              style: TextStyle(
+                  fontSize: 14, fontWeight: FontWeight.w700, color: textColor),
             ),
             const SizedBox(height: 4),
             Text(

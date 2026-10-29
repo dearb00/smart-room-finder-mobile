@@ -17,46 +17,34 @@ class RoomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    final cardColor = isDark
-        ? const Color(0xff12182B)
-        : Colors.white;
+    final cardColor = isDark ? const Color(0xff12182B) : Colors.white;
 
     final borderColor = AppColors.purple.withValues(alpha: .15);
 
-    final textColor =
-        isDark ? AppColors.darkText : AppColors.lightText;
+    final textColor = isDark ? AppColors.darkText : AppColors.lightText;
 
-    final dimColor =
-        isDark ? AppColors.darkTextDim : AppColors.lightTextDim;
+    final dimColor = isDark ? AppColors.darkTextDim : AppColors.lightTextDim;
 
     return InkWell(
       onTap: room.available ? onTap : null,
       borderRadius: BorderRadius.circular(22),
-
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 250),
-
         margin: const EdgeInsets.only(
           bottom: 16,
         ),
-
         decoration: BoxDecoration(
           color: cardColor,
-
           borderRadius: BorderRadius.circular(22),
-
           border: Border.all(
             color: borderColor,
           ),
-
           boxShadow: [
-
             BoxShadow(
               color: Colors.black.withValues(alpha: .05),
               blurRadius: 15,
               offset: const Offset(0, 6),
             ),
-
             BoxShadow(
               color: AppColors.purple.withValues(alpha: .08),
               blurRadius: 20,
@@ -64,27 +52,18 @@ class RoomCard extends StatelessWidget {
             ),
           ],
         ),
-
         child: Padding(
           padding: const EdgeInsets.all(18),
-
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-
             children: [
-
               Row(
                 children: [
-
                   Container(
                     width: 54,
                     height: 54,
-
                     decoration: BoxDecoration(
-
-                      borderRadius:
-                          BorderRadius.circular(16),
-
+                      borderRadius: BorderRadius.circular(16),
                       gradient: const LinearGradient(
                         colors: [
                           AppColors.purple,
@@ -92,23 +71,17 @@ class RoomCard extends StatelessWidget {
                         ],
                       ),
                     ),
-
                     child: const Icon(
                       Icons.meeting_room_rounded,
                       color: Colors.white,
                       size: 28,
                     ),
                   ),
-
                   const SizedBox(width: 14),
-
                   Expanded(
                     child: Column(
-                      crossAxisAlignment:
-                          CrossAxisAlignment.start,
-
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         Text(
                           "Room ${room.roomNo}",
                           style: TextStyle(
@@ -117,9 +90,7 @@ class RoomCard extends StatelessWidget {
                             color: textColor,
                           ),
                         ),
-
                         const SizedBox(height: 3),
-
                         Text(
                           room.department,
                           style: TextStyle(
@@ -144,9 +115,7 @@ class RoomCard extends StatelessWidget {
                     child: Text(
                       room.available ? "FREE" : "OCCUPIED",
                       style: TextStyle(
-                        color: room.available
-                            ? AppColors.green
-                            : AppColors.red,
+                        color: room.available ? AppColors.green : AppColors.red,
                         fontWeight: FontWeight.bold,
                         fontSize: 11,
                       ),
@@ -154,12 +123,9 @@ class RoomCard extends StatelessWidget {
                   ),
                 ],
               ),
-
               const SizedBox(height: 18),
-
               Row(
                 children: [
-
                   Expanded(
                     child: _infoTile(
                       Icons.location_on_outlined,
@@ -167,9 +133,7 @@ class RoomCard extends StatelessWidget {
                       room.blockName,
                     ),
                   ),
-
                   const SizedBox(width: 10),
-
                   Expanded(
                     child: _infoTile(
                       Icons.layers_outlined,
@@ -177,15 +141,11 @@ class RoomCard extends StatelessWidget {
                       room.floorNo,
                     ),
                   ),
-
                 ],
               ),
-
               const SizedBox(height: 10),
-
               Row(
                 children: [
-
                   Expanded(
                     child: _infoTile(
                       Icons.apartment_outlined,
@@ -193,9 +153,7 @@ class RoomCard extends StatelessWidget {
                       room.roomType,
                     ),
                   ),
-
                   const SizedBox(width: 10),
-
                   Expanded(
                     child: _infoTile(
                       Icons.people_outline,
@@ -203,31 +161,23 @@ class RoomCard extends StatelessWidget {
                       "${room.capacity}",
                     ),
                   ),
-
                 ],
               ),
-
               const SizedBox(height: 10),
-
               _infoTile(
                 Icons.schedule_outlined,
                 "Time Slot",
                 room.timeSlot,
               ),
-
               const SizedBox(height: 18),
-
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   onPressed: room.available ? onTap : null,
-
                   icon: const Icon(Icons.send_rounded),
-
                   label: const Text(
                     "Request Room",
                   ),
-
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.purple,
                     foregroundColor: Colors.white,
@@ -236,8 +186,7 @@ class RoomCard extends StatelessWidget {
                       vertical: 14,
                     ),
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(14),
                     ),
                   ),
                 ),
@@ -256,29 +205,22 @@ class RoomCard extends StatelessWidget {
   ) {
     return Container(
       padding: const EdgeInsets.all(10),
-
       decoration: BoxDecoration(
         color: AppColors.purple.withValues(alpha: .05),
         borderRadius: BorderRadius.circular(12),
       ),
-
       child: Row(
         children: [
-
           Icon(
             icon,
             size: 18,
             color: AppColors.purple,
           ),
-
           const SizedBox(width: 8),
-
           Expanded(
             child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 Text(
                   title,
                   style: const TextStyle(
@@ -286,7 +228,6 @@ class RoomCard extends StatelessWidget {
                     color: Colors.grey,
                   ),
                 ),
-
                 Text(
                   value,
                   overflow: TextOverflow.ellipsis,
@@ -298,7 +239,6 @@ class RoomCard extends StatelessWidget {
               ],
             ),
           ),
-
         ],
       ),
     );

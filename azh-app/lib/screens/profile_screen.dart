@@ -40,11 +40,16 @@ class ProfileScreen extends StatelessWidget {
             alignment: Alignment.center,
             child: Text(
               avatarInitials,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w700, color: AppColors.purple),
+              style: const TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.purple),
             ),
           ),
           const SizedBox(height: 12),
-          Text(displayName, style: TextStyle(fontSize: 17, fontWeight: FontWeight.w700, color: textColor)),
+          Text(displayName,
+              style: TextStyle(
+                  fontSize: 17, fontWeight: FontWeight.w700, color: textColor)),
           const SizedBox(height: 4),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
@@ -54,7 +59,10 @@ class ProfileScreen extends StatelessWidget {
             ),
             child: Text(
               role.label,
-              style: const TextStyle(color: AppColors.purple, fontSize: 11, fontWeight: FontWeight.w700),
+              style: const TextStyle(
+                  color: AppColors.purple,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w700),
             ),
           ),
           const SizedBox(height: 24),
@@ -66,11 +74,14 @@ class ProfileScreen extends StatelessWidget {
             ),
             child: Column(
               children: [
-                _tile(Icons.badge_outlined, 'Department', 'Computer Science', textColor, dimColor),
+                _tile(Icons.badge_outlined, 'Department', 'Computer Science',
+                    textColor, dimColor),
                 Divider(height: 1, color: borderColor),
-                _tile(Icons.notifications_outlined, 'Notifications', 'On', textColor, dimColor),
+                _tile(Icons.notifications_outlined, 'Notifications', 'On',
+                    textColor, dimColor),
                 Divider(height: 1, color: borderColor),
-                _tile(Icons.dark_mode_outlined, 'Theme', 'System', textColor, dimColor),
+                _tile(Icons.dark_mode_outlined, 'Theme', 'System', textColor,
+                    dimColor),
               ],
             ),
           ),
@@ -91,7 +102,8 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _tile(IconData icon, String label, String value, Color textColor, Color dimColor) {
+  Widget _tile(IconData icon, String label, String value, Color textColor,
+      Color dimColor) {
     return ListTile(
       leading: Icon(icon, color: AppColors.purple, size: 20),
       title: Text(label, style: TextStyle(fontSize: 13, color: textColor)),

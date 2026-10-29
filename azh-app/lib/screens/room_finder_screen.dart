@@ -31,7 +31,6 @@ class RoomFinderScreen extends StatefulWidget {
 class _RoomFinderScreenState extends State<RoomFinderScreen> {
   int _tabIndex = 0;
 
-  
   Timer? _refreshTimer;
 
   // Backend rooms
@@ -46,14 +45,12 @@ class _RoomFinderScreenState extends State<RoomFinderScreen> {
     super.initState();
 
     fetchRooms();
-   _refreshTimer = Timer.periodic(
+    _refreshTimer = Timer.periodic(
       const Duration(seconds: 3),
-
       (timer) {
         fetchRooms();
       },
     );
-
   }
 
   Future<void> fetchRooms() async {
@@ -75,48 +72,44 @@ class _RoomFinderScreenState extends State<RoomFinderScreen> {
   }
 
   void _bookRoom(Room room) {
-  showBookingFormSheet(
-    context,
-    room: room,
-    submitLabel: 'Request to Smart Engine',
-    onSubmit: (teacherName, purpose, subject) async {
+    showBookingFormSheet(
+      context,
+      room: room,
+      submitLabel: 'Request to Smart Engine',
+      onSubmit: (teacherName, purpose, subject) async {
+        try {
+          await ApiService().requestBooking(
+            studentName: teacherName,
+            roomNo: room.roomNo,
+            day: "Monday",
+            timeSlot: room.timeSlot,
+          );
+          // Refresh room list immediately
+          await fetchRooms();
 
-      try {
+          if (!mounted) return;
+          await showSmartEngineOverlay(context);
 
-        await ApiService().requestBooking(
-          studentName: teacherName,
-          roomNo: room.roomNo,
-          day: "Monday",
-          timeSlot: room.timeSlot,
-        );
-        // Refresh room list immediately
-        await fetchRooms();
+          if (!mounted) return;
 
-        if (!mounted) return;
-        await showSmartEngineOverlay(context);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Booking request sent to Smart Engine"),
+            ),
+          );
+        } catch (e) {
+          debugPrint("Booking Error: $e");
+          if (!mounted) return;
 
-        if (!mounted) return;
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Booking request sent to Smart Engine"),
-          ),
-        );
-
-      } catch (e) {
-
-        debugPrint("Booking Error: $e");
-        if(! mounted) return;
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text("Booking failed"),
-          ),
-        );
-      }
-    },
-  );
-}
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Booking failed"),
+            ),
+          );
+        }
+      },
+    );
+  }
 
   Future<void> _approveRequest(RoomRequest request) async {
     final approved = await showSmartEngineOverlay(
@@ -330,13 +323,13 @@ class _RoomFinderScreenState extends State<RoomFinderScreen> {
         });
       },
     );
-
   }
+
   @override
-void dispose() {
-  _refreshTimer?.cancel();
-  super.dispose();
-}
+  void dispose() {
+    _refreshTimer?.cancel();
+    super.dispose();
+  }
 }
 
 class _RequestCard extends StatelessWidget {
@@ -354,126 +347,108 @@ class _RequestCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
-
-    
-
-   return Container(
-  margin: const EdgeInsets.only(bottom: 12),
-  padding: const EdgeInsets.all(16),
-  decoration: BoxDecoration(
-    color: const Color(0xFF25164F),
-    borderRadius: BorderRadius.circular(18),
-    border: Border.all(
-      color: const Color(0xFF8B5CF6),
-      width: 1.5,
-    ),
-    boxShadow: [
-      BoxShadow(
-        color: const Color(0xFF8B5CF6).withOpacity(0.25),
-        blurRadius: 12,
-        offset: const Offset(0, 5),
-      ),
-    ],
-  ),
-  child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-
-      Text(
-        '🏫 Room ${request.room.roomNo} • ${request.subject}',
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 17,
-          fontWeight: FontWeight.bold,
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: const Color(0xFF25164F),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(
+          color: const Color(0xFF8B5CF6),
+          width: 1.5,
         ),
-      ),
-
-      const SizedBox(height: 14),
-
-      Text(
-        '👨‍🎓 From: ${request.studentName}',
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-
-      const SizedBox(height: 6),
-
-      Text(
-        '👩‍🏫 Teacher: ${request.teacherName}',
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-
-      const SizedBox(height: 6),
-
-      Text(
-        '📚 Purpose: ${request.purpose}',
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-
-      const SizedBox(height: 18),
-
-      Row(
-        children: [
-
-          Expanded(
-            child: OutlinedButton(
-              onPressed: onReject,
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: Colors.redAccent),
-                foregroundColor: Colors.redAccent,
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text(
-                "Reject",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF8B5CF6).withValues(alpha: 0.25),
+            blurRadius: 12,
+            offset: const Offset(0, 5),
           ),
-
-          const SizedBox(width: 12),
-
-          Expanded(
-            child: ElevatedButton(
-              onPressed: onApprove,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green,
-                foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text(
-                "Approve",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-
         ],
       ),
-
-    ],
-  ),
-);
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '🏫 Room ${request.room.roomNo} • ${request.subject}',
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 14),
+          Text(
+            '👨‍🎓 From: ${request.studentName}',
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            '👩‍🏫 Teacher: ${request.teacherName}',
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            '📚 Purpose: ${request.purpose}',
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 18),
+          Row(
+            children: [
+              Expanded(
+                child: OutlinedButton(
+                  onPressed: onReject,
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: Colors.redAccent),
+                    foregroundColor: Colors.redAccent,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    "Reject",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: onApprove,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    "Approve",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

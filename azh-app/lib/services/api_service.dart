@@ -3,17 +3,14 @@ import 'package:http/http.dart' as http;
 import '../models/room.dart' show Room;
 
 class ApiService {
-  
- 
   // ==============================
   // BASE URL
   // ==============================
 
   // web
 
-   static const String baseUrl =
-    "https://ubiquitous-space-fiesta-v6j9pxqwx5q427gw-8081.app.github.dev/api";
-  
+  static const String baseUrl =
+      "https://ubiquitous-space-fiesta-v6j9pxqwx5q427gw-8081.app.github.dev/api";
 
   // Android Emulator
   // static const String baseUrl = "http://10.0.2.2:8080/api";

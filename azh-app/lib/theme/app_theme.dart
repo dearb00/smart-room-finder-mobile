@@ -10,8 +10,7 @@ class AppColors {
   static const navy2 = Color(0xFF1A1448);
 
   static const darkBg = Color(0xFF100C2C);
-  static const glass =
-    Color.fromARGB(70, 28, 24, 74);
+  static const glass = Color.fromARGB(70, 28, 24, 74);
   static const darkCard = Color(0xFF1B1642);
   static const darkCard2 = Color(0xFF221C52);
   static const darkBorder = Color(0xFF332C6E);
